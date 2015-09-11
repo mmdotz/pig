@@ -1,3 +1,6 @@
+
+require_relative '../db/setup'
+require_relative '../lib/all'
 require_relative '../lib/pig'
 require_relative '../lib/hog'
 
@@ -20,12 +23,14 @@ end
 #Pig and Hog are class constants
 game_classes = {
   1 => Pig,
-  2 => Hog
+  2 => Hog,
+  #Make displaying the Scoreboard an option, not a constant?
+  # 3 => Scoreboard
 }
 
 game_class = select_from(game_classes)
 
-puts "Playing a game of #{game_class}"
+puts "You chose #{game_class}"
 game = game_class.new
 #      ^ game class is either Pig or Hog. The constant of a class can be assigned to a local variable and be used like any other local variable
 

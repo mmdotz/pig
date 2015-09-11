@@ -3,9 +3,9 @@ class TrackWinsAndLosses < ActiveRecord::Migration
 
   def change
   #where changes are defined for migration
-    create_table(:scoreboard) do |t|
+    create_table(:scoreboards) do |t|
       t.column :name,  :string, limit: 20
-      t.column :score, :integer
+      t.column :wins,  :integer
     end
   end
 

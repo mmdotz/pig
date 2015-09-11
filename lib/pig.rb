@@ -1,9 +1,10 @@
+
 require_relative './player'
 
 class Pig
   def initialize
     @players   = []
-    @max_score = 100
+    @max_score = 12
   end
 
   def get_players
@@ -15,7 +16,13 @@ class Pig
         return
       else
         @players.push Player.new(input)
+        #new instance of Scoreboard with all players populating score.name
+        #cannot create new instance: uninitialized constant error
+        # sb = Scoreboard.new
+        # sb.create(name: input)
+        # sb.save
       end
+
     end
   end
 
@@ -30,8 +37,14 @@ class Pig
   end
 
   def remove_losing_players!
+    #before kicking out, add players scores to scoreboard
     if @players.any? { |p| p.score > @max_score }
+      #then call a win
+      #this code allows game to run but doesn't populate scoreboard
+      sb = Scoreboard.new
+      sb.create(wins: 1)
       max_score = @players.map { |p| p.score }.max
+      #anyone who doesn't have max.score create loss
       @players = @players.select { |p| p.score == max_score }
     end
   end
@@ -60,4 +73,10 @@ class Pig
       end
     end
   end
+
+  #sb = Scoreboard.new
+  #sb.name = player.name
+  #sb.score = player.score
+  #before updating a record, retrieve with find_by
+
 end

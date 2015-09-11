@@ -1,8 +1,12 @@
 class Scoreboard < ActiveRecord::Base
+  #score is saved between rounds
+  #turn total only increases score is player holds
+  #if player1 score == 100 then win
+  #if player2 score == 100 then loss
 
-  #define a method that saves the name's score after each roll
-  def
-
-  end
+  #display method lives here
 
 end
+
+
+
