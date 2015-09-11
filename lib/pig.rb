@@ -15,12 +15,13 @@ class Pig
       if input == "q" || input == ""
         return
       else
-        @players.push Player.new(input)
+        player = Player.new(input)
+        @players.push player
         #new instance of Scoreboard with all players populating score.name
         #cannot create new instance: uninitialized constant error
-        # sb = Scoreboard.new
-        # sb.create(name: input)
-        # sb.save
+        sb = Scoreboard.new
+        sb.find_or_create_by(name: player.name)
+        sb.save
       end
 
     end
@@ -41,8 +42,9 @@ class Pig
     if @players.any? { |p| p.score > @max_score }
       #then call a win
       #this code allows game to run but doesn't populate scoreboard
-      sb = Scoreboard.new
-      sb.create(wins: 1)
+      # sb = Scoreboard.new
+      # sb.find_or_create_by(wins: 1)
+      # binding pry
       max_score = @players.map { |p| p.score }.max
       #anyone who doesn't have max.score create loss
       @players = @players.select { |p| p.score == max_score }
